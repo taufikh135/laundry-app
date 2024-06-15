@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true">
+  <div class="container min-h-screen flex justify-center flex-col p-4">
+    <div class="">
+      <img src="/assets/img/logo.png" alt="" class="block mx-auto" srcset="" />
+      <div class="border-[1.5px] rounded-2xl border-black">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center"
+            >Syarat & Ketentuan</ion-card-title
+          >
+        </ion-card-header>
+        <ion-card-content>
+          <div [innerHTML]="content"></div>
+          <ion-button
+            expand="block"
+            (click)="back()"
+            class="mt-4 bg-primary font-bold"
+            >Kembali</ion-button
+          >
+        </ion-card-content>
+      </div>
+    </div>
+  </div>
+</ion-content>

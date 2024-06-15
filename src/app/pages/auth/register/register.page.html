@@ -1,0 +1,117 @@
+<ion-content [fullscreen]="true">
+  <div class="container min-h-screen flex justify-center flex-col p-4">
+    <div class="">
+      <img src="/assets/img/logo.png" alt="" class="block mx-auto" srcset="" />
+      <div class="border-[1.5px] rounded-2xl border-black">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Daftar</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form [formGroup]="form">
+            <div>
+              <ion-input
+                label="Nama"
+                label-placement="floating"
+                fill="outline"
+                class="mt-4"
+                formControlName="name"
+                placeholder="Masukan Nama"
+              ></ion-input>
+              <p class="text-red-500">
+                {{ form.hasError('name') ? form.getError('name')[0] : '' }}
+              </p>
+            </div>
+
+            <div>
+              <ion-input
+                label="NO. Handphone"
+                class="mt-4"
+                type="tel"
+                label-placement="floating"
+                formControlName="number_phone"
+                fill="outline"
+                placeholder="628xxxxxx"
+              ></ion-input>
+              <p class="text-red-500">
+                {{ form.hasError('number_phone') ?
+                form.getError('number_phone')[0] : '' }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <ion-textarea
+                label="Alamat"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Masukan Alamat Lengkap"
+                autoGrow="true"
+                formControlName="address"
+              ></ion-textarea>
+              <p class="text-red-500">
+                {{ form.hasError('address') ? form.getError('address')[0] : ''
+                }}
+              </p>
+            </div>
+            <div>
+              <ion-input
+                label="Password"
+                class="mt-4"
+                label-placement="floating"
+                fill="outline"
+                type="password"
+                formControlName="password"
+                placeholder="Masukan Password"
+              ></ion-input>
+              <p class="text-red-500">
+                {{ form.hasError('password') ? form.getError('password')[0] : ''
+                }}
+              </p>
+            </div>
+            <div>
+              <ion-input
+                label="Konfirmasi Password"
+                class="mt-4"
+                label-placement="floating"
+                fill="outline"
+                type="password"
+                formControlName="password_confirmation"
+                placeholder="Masukan Konfirmasi Password"
+              ></ion-input>
+              <p class="text-red-500">
+                {{ form.hasError('password_confirmation') ?
+                form.getError('password_confirmation')[0] : ''}}
+              </p>
+            </div>
+            <div>
+              <div class="mt-4 flex items-center">
+                <ion-checkbox
+                  labelPlacement="end"
+                  class=""
+                  formControlName="syarat_ketentuan"
+                >
+                </ion-checkbox
+                ><a routerLink="/syarat-ketentuan" class="text-primary ms-3"
+                  >Syarat & Ketentuan</a
+                >
+              </div>
+              <p class="text-red-500">
+                {{ form.hasError('syarat_ketentuan') ?
+                form.getError('syarat_ketentuan')[0] : '' }}
+              </p>
+            </div>
+            <ion-button
+              expand="block"
+              class="mt-4 bg-primary"
+              [disabled]="!canClick"
+              (click)="submit()"
+              >Buat Akun</ion-button
+            >
+          </form>
+          <div class="mt-4 ion-text-center">
+            Sudah punya Akun?
+            <a routerLink="/auth/login" class="text-primary">Login</a>
+          </div>
+        </ion-card-content>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true">
+  <!-- navbar -->
+  <nav
+    class="w-full flex flex-row justify-between bg-primary px-5 py-3 fixed rounded-b-xl"
+  >
+    <div class="flex gap-2 items-center">
+      <div
+        class="ion-text-center p-4 bg-white flex justify-center items-center font-semibold"
+        style="border-radius: 50%; width: 40px; height: 40px"
+      >
+        {{ user.name.charAt(0) }}
+      </div>
+      <div>
+        <h2 class="font-semibold">{{ user.name }}</h2>
+        <p>{{ user.address }}</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <a>
+        <ion-img src="/assets/icon/lonceng.svg" class="h-8"></ion-img>
+      </a>
+      <a (click)="whatsappRedirect()">
+        <ion-img src="/assets/icon/customer-service.svg" class="h-8"></ion-img>
+      </a>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- content -->
+  <main class="p-5 mt-20 mb-32">
+    <ion-card class="rounded-xl bg-white p-3 shadow m-0 -z-10">
+      <fa-icon
+        [icon]="['fas', 'coins']"
+        class="text-yellow-500 text-2xl"
+      ></fa-icon>
+      <span class="text-2xl ms-3">{{ user.point }}</span>
+    </ion-card>
+
+    <!-- Kategori -->
+    <div class="grid grid-cols-3 mt-8 gap-3">
+      @for (category of categories; track $index) {
+      <a
+        class="flex flex-col gap-3 items-center"
+        (click)="goToCategory(category.code)"
+      >
+        <div
+          class="col-span-3 border-[3px] border-blue-500 bg-white shadow rounded-xl overflow-hidden"
+        >
+          <img src="{{ category.image_url }}" alt="" class="" srcset="" />
+        </div>
+        <span>{{ category.name }}</span>
+      </a>
+      }
+    </div>
+    <!-- /Kategori -->
+
+    <!-- Info -->
+    <div class="mt-5">
+      <h2 class="text-2xl">Info</h2>
+
+      <ul class="flex flex-col">
+        @for (info of infos; track $index) {
+        <li (click)="goToInfo(info.redirect_url)" class="">
+          <ion-card class="rounded-xl shadow">
+            <img
+              [src]="info.image_url"
+              [alt]="info.title"
+              srcset=""
+              class="w-full h-28"
+            />
+          </ion-card>
+        </li>
+        }
+      </ul>
+    </div>
+    <!-- /Info -->
+  </main>
+  <!-- /content -->
+
+  <app-navbar-bottom></app-navbar-bottom>
+</ion-content>

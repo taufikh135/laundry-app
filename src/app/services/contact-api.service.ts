@@ -1,0 +1,23 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ContactApiService {
+  private baseUrl = environment.apiUrl + '/contacts';
+
+  constructor(private http: HttpClient) {}
+
+  public getAll(): Observable<Object> {
+    const url = this.baseUrl;
+    return this.http.get(url);
+  }
+
+  public get(id: string): Observable<Object> {
+    const url = this.baseUrl + '/' + id;
+    return this.http.get(url);
+  }
+}

@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true">
+  <div class="container min-h-screen flex justify-center flex-col p-4">
+    <div class="">
+      <img src="/assets/img/logo.png" alt="" class="block mx-auto" srcset="" />
+      <div class="border-[1.5px] rounded-2xl border-black">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Login</ion-card-title>
+        </ion-card-header>
+        <ion-card-header>
+          <form [formGroup]="form">
+            <div>
+              <ion-input
+                label="NO. Handphone"
+                class="mt-4"
+                type="tel"
+                label-placement="floating"
+                formControlName="number_phone"
+                fill="outline"
+                placeholder="628xxxxxx"
+              ></ion-input>
+              <p class="text-red-500">
+                {{ form.hasError('number_phone') ?
+                form.getError('number_phone')[0] : '' }}
+              </p>
+            </div>
+            <div>
+              <ion-input
+                label="Password"
+                class="mt-4"
+                label-placement="floating"
+                fill="outline"
+                type="password"
+                formControlName="password"
+                placeholder="Masukan Password"
+              ></ion-input>
+              <p class="text-red-500">
+                {{ form.hasError('password') ? form.getError('password')[0] : ''
+                }}
+              </p>
+            </div>
+            <div class="mt-4">
+              <a routerLink="/auth/forgot-password" class="text-primary"
+                >Forgot Password?</a
+              >
+            </div>
+            <ion-button
+              expand="block"
+              class="mt-4"
+              (click)="submit()"
+              color="primary"
+              >Login</ion-button
+            >
+            <hr class="mt-4" />
+            <ion-button
+              expand="block"
+              class="mt-4"
+              routerLink="/auth/register"
+              color="primary"
+              fill="outline"
+              [disabled]="!canClick"
+              >Buat Akun</ion-button
+            >
+            <div class="mt-4 ion-text-center">
+              Belum verifikasi?
+              <a routerLink="/auth/verification" class="text-primary"
+                >Verifikasi</a
+              >
+            </div>
+          </form>
+        </ion-card-header>
+      </div>
+    </div>
+  </div>
+</ion-content>
