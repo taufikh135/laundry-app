@@ -14,7 +14,7 @@ export class NavbarTopComponent implements OnInit {
   public navbarTopTitle: string = '';
   public whatsappRedirectUrl: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.navbarTopTitle = localStorage.getItem('navbarTopTitle') ?? '';

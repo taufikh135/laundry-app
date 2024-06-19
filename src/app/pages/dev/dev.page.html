@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>dev</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">dev</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-input
+    label="URL Server"
+    label-placement="floating"
+    fill="outline"
+    placeholder="Enter text"
+    [(ngModel)]="urlServer"
+  ></ion-input>
+  <ion-button (click)="submit()">Simpan</ion-button>
+</ion-content>

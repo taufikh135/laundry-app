@@ -85,7 +85,7 @@ export class AppApiService {
   }
 
   public async getUserCurrent(): Promise<Observable<Object>> {
-    const url = this.baseUrl + '/current';
+    const url = this.baseUrl + '/users/current';
     const token = await this.authService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -97,7 +97,27 @@ export class AppApiService {
   }
 
   public getServices(productCode: string = ''): Observable<Object> {
-    const url = `${this.baseUrl}/services?type_code=${productCode}`;
+    const url = `${this.baseUrl}/services?product_code=${productCode}`;
     return this.http.get(url);
+  }
+
+  public getSocialMedias(): Observable<Object> {
+    const url = this.baseUrl + '/social-media';
+    return this.http.get(url);
+  }
+
+  public async updateUserCurrent(data: {
+    name: string;
+    address: string;
+  }): Promise<Observable<object>> {
+    const url = this.baseUrl + '/users/current';
+    const token = await this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.put(url, data, {
+      headers: headers,
+    });
   }
 }

@@ -106,6 +106,11 @@ export class CategoryPage implements OnInit {
       },
     });
 
+    if (!this.type.kiloan) {
+      this.router.navigateByUrl('products/' + typeCode);
+      return;
+    }
+
     // get products
     this.appApiService.getProducts(typeCode).subscribe({
       next: (value: any) => {
@@ -129,10 +134,12 @@ export class CategoryPage implements OnInit {
     );
 
     if (!productCode) return;
+    console.log(productCode);
 
     this.appApiService.getServices(productCode).subscribe({
       next: (value: any) => {
         this.services = value.data;
+        console.log(value.data);
       },
     });
   }

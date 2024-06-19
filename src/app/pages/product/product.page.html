@@ -12,33 +12,31 @@
         >
           !
         </div>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe,
-          similique aliquam obcaecati quibusdam ullam autem ab error officia
-          voluptatem expedita.
-        </p>
+        <p>{{type?.description}}</p>
       </div>
     </ion-item>
+    @for (product of products; track $index) {
     <ion-item class="mt-3">
       <div class="flex justify-between items-center w-full mb-3">
         <div class="flex gap-3 items-center">
-          <ion-img src="https://via.placeholder.com/100" class="h-12"></ion-img>
+          <ion-img [src]="product.image_url" class="h-12"></ion-img>
           <div>
-            <h3>Kiloan</h3>
-            <div>Rp{{ totalPrice}}</div>
+            <h3>{{ product.name }}</h3>
+            <div>Rp{{ product?.price }}</div>
           </div>
         </div>
         <div class="flex gap-2 items-center">
           <button (click)="decrementQuantity()" class="text-4xl text-red-500">
             -
           </button>
-          <span class="text-2xl">{{ quantity }}</span>
+          <span class="text-2xl">{{ product.quantity }}</span>
           <button (click)="incrementQuantity()" class="text-2xl text-green-500">
             +
           </button>
         </div>
       </div>
     </ion-item>
+    }
   </main>
   <!-- /content -->
 

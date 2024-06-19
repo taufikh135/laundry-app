@@ -131,7 +131,8 @@ export class DashboardPage implements OnInit {
   }
 
   public goToCategory(code: string): void {
-    this.router.navigateByUrl(`categories/${code}`);
+    const url = `categories/${code}`;
+    this.router.navigateByUrl(url);
   }
 
   public goToInfo(url: string): void {

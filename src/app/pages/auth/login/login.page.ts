@@ -24,6 +24,7 @@ import { IonicStorageModule, Storage } from '@ionic/storage-angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppApiService } from 'src/app/services/app-api.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-login',
@@ -65,7 +66,9 @@ export class LoginPage implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(environment.apiUrl);
+  }
 
   public submit() {
     this.canClick = false;

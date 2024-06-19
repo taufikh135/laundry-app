@@ -8,11 +8,12 @@ import { VerificationPage } from './pages/auth/verification/verification.page';
 import { ForgotPasswordPage } from './pages/auth/forgot-password/forgot-password.page';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
 import { NavbarBottomComponent } from './components/navbar-bottom/navbar-bottom.component';
+import { ProductPage } from './pages/product/product.page';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dev',
     pathMatch: 'full',
   },
 
@@ -64,5 +65,29 @@ export const routes: Routes = [
     path: 'categories/:code',
     loadComponent: () =>
       import('./pages/category/category.page').then((m) => m.CategoryPage),
+  },
+
+  {
+    path: 'products/:code',
+    component: ProductPage,
+  },
+  {
+    path: 'account',
+    loadComponent: () =>
+      import('./pages/account/account.page').then((m) => m.AccountPage),
+  },
+  {
+    path: 'pesanan',
+    loadComponent: () =>
+      import('./pages/pesanan/pesanan.page').then((m) => m.PesananPage),
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./pages/profile/profile.page').then((m) => m.ProfilePage),
+  },
+  {
+    path: 'dev',
+    loadComponent: () => import('./pages/dev/dev.page').then((m) => m.DevPage),
   },
 ];

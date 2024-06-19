@@ -1,0 +1,59 @@
+<ion-content [fullscreen]="true">
+  <!-- navbar -->
+  <nav
+    class="w-full flex flex-row justify-between border-b-2 px-5 py-3 fixed z-10 bg-primary text-white"
+  >
+    <div class="flex gap-5 items-center w-full">
+      <a (click)="goBack()" class="text-3xl"><</a>
+      <h1 class="text-2xl text-center flex-grow">Akun</h1>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <main>
+    <div class="bg-white mt-16 p-3 flex gap-5 items-center">
+      <div
+        class="p-3 w-10 h-10 rounded-full border-2 border-black flex items-center justify-center"
+      >
+        {{ user.name.charAt(0) }}
+      </div>
+      <ul>
+        <li class="font-semibold">{{ this.user.name }}</li>
+        <li>{{ this.user.number_phone }}</li>
+        <li>{{ this.user.address }}</li>
+      </ul>
+    </div>
+
+    <div class="bg-white mt-3">
+      <h2 class="p-3">Akun</h2>
+      <ion-item routerLink="/profile">
+        <i class="bi bi-person me-3 text-2xl"></i>
+        <ion-label>Profile</ion-label>
+      </ion-item>
+      <ion-item routerLink="/auth/forgot-password">
+        <i class="bi bi-lock me-3 text-2xl"></i>
+        <ion-label>Reset Password</ion-label>
+      </ion-item>
+
+      <h2 class="p-3">Social Media</h2>
+      @for(socialMedia of socialMedias; track $index) {
+      <ion-item (click)="goToSocialMedia(socialMedia.url)">
+        <i class="bi bi-arrow-up-right-square me-3 text-2xl"></i>
+        <ion-label>{{ socialMedia.name }}</ion-label>
+      </ion-item>
+      }
+
+      <h2 class="p-3">Lainnya</h2>
+      <ion-item (click)="goToHelp()">
+        <i class="bi bi-question-circle me-3 text-2xl"></i>
+        <ion-label>Hubungi Kami</ion-label>
+      </ion-item>
+      <ion-item class="bg-red-300" (click)="goToLogout()">
+        <i class="bi bi-box-arrow-left me-3 text-2xl"></i>
+        <ion-label>Logout</ion-label>
+      </ion-item>
+    </div>
+  </main>
+
+  <app-navbar-bottom></app-navbar-bottom>
+</ion-content>
