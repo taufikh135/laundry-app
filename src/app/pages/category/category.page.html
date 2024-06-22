@@ -57,6 +57,7 @@
               label="Pilih Produk"
               label-placement="floating"
               fill="outline"
+              [(ngModel)]="form.product_code"
               (ionChange)="selectProduct($event)"
             >
               @for (product of products; track $index) {
@@ -72,6 +73,7 @@
               label="Pilih Layanan"
               label-placement="floating"
               fill="outline"
+              [(ngModel)]="form.service_code"
               (ionChange)="selectService($event)"
             >
               @for (service of services; track $index) {
@@ -92,6 +94,7 @@
               label="Pilih Jasa"
               label-placement="floating"
               fill="outline"
+              [(ngModel)]="form.jasa"
               (ionChange)="selectService($event)"
             >
               @for (service of services; track $index) {

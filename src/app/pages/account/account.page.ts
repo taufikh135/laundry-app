@@ -17,11 +17,6 @@ import { NavbarBottomComponent } from 'src/app/components/navbar-bottom/navbar-b
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppApiService } from 'src/app/services/app-api.service';
-import {
-  FaIconComponent,
-  FaIconLibrary,
-} from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-account',
@@ -41,7 +36,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     FormsModule,
     NavbarTopComponent,
     NavbarBottomComponent,
-    FaIconComponent,
     RouterLink,
   ],
   providers: [AuthService, AppApiService],
@@ -65,11 +59,8 @@ export class AccountPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private appApiService: AppApiService,
-    private faIconLibrary: FaIconLibrary,
     private alertController: AlertController
-  ) {
-    this.faIconLibrary.addIconPacks(fas);
-  }
+  ) {}
 
   async ngOnInit() {
     (await this.appApiService.getUserCurrent()).subscribe({

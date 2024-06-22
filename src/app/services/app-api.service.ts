@@ -109,6 +109,7 @@ export class AppApiService {
   public async updateUserCurrent(data: {
     name: string;
     address: string;
+    fcm_token: string | null;
   }): Promise<Observable<object>> {
     const url = this.baseUrl + '/users/current';
     const token = await this.authService.getToken();

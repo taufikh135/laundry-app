@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import {
   IonContent,
   IonHeader,
@@ -15,6 +20,7 @@ import {
   IonSelectOption,
   IonCard,
   IonCardContent,
+  AlertController,
 } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarTopComponent } from 'src/app/components/navbar-top/navbar-top.component';
@@ -44,6 +50,7 @@ import { NavbarBottomComponent } from 'src/app/components/navbar-bottom/navbar-b
     IonSelect,
     IonSelectOption,
     NavbarBottomComponent,
+    ReactiveFormsModule,
   ],
   providers: [AppApiService],
 })
@@ -67,10 +74,17 @@ export class CategoryPage implements OnInit {
   public services: Array<any> = [];
   public service: any;
 
+  public form = {
+    product_code: '',
+    service_code: '',
+    jasa: '',
+  };
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private appApiService: AppApiService
+    private appApiService: AppApiService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -103,23 +117,30 @@ export class CategoryPage implements OnInit {
     this.appApiService.getType(typeCode).subscribe({
       next: (value: any) => {
         this.type = value.data;
+
+        if (!this.type.kiloan) {
+          this.router.navigateByUrl('products/' + typeCode);
+        } else {
+          // get products
+          this.appApiService.getProducts(typeCode).subscribe({
+            next: (value: any) => {
+              this.products = value.data;
+            },
+          });
+
+          // buka modal
+          this.isOrderModalOpen = true; // get products
+          this.appApiService.getProducts(typeCode).subscribe({
+            next: (value: any) => {
+              this.products = value.data;
+            },
+          });
+
+          // buka modal
+          this.isOrderModalOpen = true;
+        }
       },
     });
-
-    if (!this.type.kiloan) {
-      this.router.navigateByUrl('products/' + typeCode);
-      return;
-    }
-
-    // get products
-    this.appApiService.getProducts(typeCode).subscribe({
-      next: (value: any) => {
-        this.products = value.data;
-      },
-    });
-
-    // buka modal
-    this.isOrderModalOpen = true;
   }
 
   public closeModal(): void {
@@ -134,12 +155,10 @@ export class CategoryPage implements OnInit {
     );
 
     if (!productCode) return;
-    console.log(productCode);
 
     this.appApiService.getServices(productCode).subscribe({
       next: (value: any) => {
         this.services = value.data;
-        console.log(value.data);
       },
     });
   }
@@ -152,7 +171,30 @@ export class CategoryPage implements OnInit {
     this.service = service;
   }
 
-  public submitOrder(): void {
+  public async submitOrder(): Promise<void> {
     this.isOrderModalOpen = false;
+
+    console.log(this.form);
+
+    const alert = await this.alertController.create({
+      header: 'Sukses',
+      message: 'Pesanan anda telah dibuat',
+      buttons: [
+        {
+          text: 'OK',
+        },
+        {
+          text: 'Lihat Pesanan',
+          handler: () => {
+            this.router.navigate(['/pesanan']);
+          },
+        },
+      ],
+    });
+    await alert.present();
+
+    this.form.product_code = '';
+    this.form.service_code = '';
+    this.form.jasa = '';
   }
 }

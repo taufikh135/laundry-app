@@ -11,11 +11,6 @@ import {
   IonCard,
 } from '@ionic/angular/standalone';
 import { NavbarBottomComponent } from 'src/app/components/navbar-bottom/navbar-bottom.component';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import {
-  FaIconComponent,
-  FaIconLibrary,
-} from '@fortawesome/angular-fontawesome';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -37,7 +32,6 @@ import { AppApiService } from 'src/app/services/app-api.service';
     CommonModule,
     FormsModule,
     NavbarBottomComponent,
-    FaIconComponent,
     HttpClientModule,
     RouterLink,
     RouterModule,
@@ -77,13 +71,10 @@ export class DashboardPage implements OnInit {
   ];
 
   constructor(
-    private library: FaIconLibrary,
     private localStorageService: LocalStorageService,
     private router: Router,
     private appApiService: AppApiService
   ) {
-    this.library.addIconPacks(fas);
-
     this.appApiService.getContact('WA').subscribe({
       next: (value: any) => {
         this.whatsappRedirectUrl = value.data.redirect_url;

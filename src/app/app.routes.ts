@@ -13,7 +13,7 @@ import { ProductPage } from './pages/product/product.page';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dev',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 

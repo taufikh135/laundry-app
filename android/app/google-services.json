@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "34432386503",
+    "project_id": "laundry-io-58e17",
+    "storage_bucket": "laundry-io-58e17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34432386503:android:049e63f1f2645fbe5645e2",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6QQjBZqIoThV7Wpe0_haDY0Rvsg-dxMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

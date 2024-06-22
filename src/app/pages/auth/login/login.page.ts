@@ -25,6 +25,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AppApiService } from 'src/app/services/app-api.service';
 import { environment } from 'src/environments/environment.prod';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
 
 @Component({
   selector: 'app-login',
@@ -63,16 +64,17 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private appApiService: AppApiService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private pushNotificationService: PushNotificationService
   ) {}
 
-  ngOnInit() {
-    console.log(environment.apiUrl);
-  }
+  ngOnInit() {}
 
   public submit() {
+    // klik button
     this.canClick = false;
 
+    // data login
     const dataRequest: {
       number_phone: string;
       password: string;
@@ -81,15 +83,31 @@ export class LoginPage implements OnInit {
       password: this.form.get('password')?.value ?? '',
     };
 
+    // api login
     this.appApiService.login(dataRequest).subscribe({
+      // success
       next: async (value: any) => {
         this.authService.setToken(value.data.token);
 
         const request = await this.appApiService.getUserCurrent();
-
         request.subscribe({
           next: (value: any) => {
             this.localStorageService.setItemJson('user', value.data);
+
+            const user: any = value.data;
+            const fcmToken = this.pushNotificationService.getToken();
+
+            const requestData: {
+              address: string;
+              name: string;
+              fcm_token: string | null;
+            } = {
+              name: user.name,
+              address: user.address,
+              fcm_token: fcmToken,
+            };
+
+            this.appApiService.updateUserCurrent(requestData);
           },
         });
 
